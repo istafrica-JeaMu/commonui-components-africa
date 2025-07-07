@@ -43,7 +43,7 @@
         "default": "./dist/index.cjs.js"
       }
     },
-    "./style.css": "./dist/assets/style.css"
+    "./style.css": "./dist/assets/commonui-components-africa.css"
   },
   "typings": "./dist/index.d.ts",
   "types": "./dist/index.d.ts",

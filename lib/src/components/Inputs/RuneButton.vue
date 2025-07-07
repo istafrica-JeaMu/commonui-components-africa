@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import RuneIcon from '@/components/DataDisplay/RuneIcon.vue';
-import RuneSpinner from '@/components/Feedback/RuneSpinner.vue';
-import { ButtonIconType } from '@/components/types';
-import VoltButton from '@/volt/VoltButton.vue';
+import RuneIcon from '../DataDisplay/RuneIcon.vue';
+import RuneSpinner from '../Feedback/RuneSpinner.vue';
+import { ButtonIconType } from '../types';
+import VoltButton from '../../volt/VoltButton.vue';
 
 type ButtonProps = {
   /**
