@@ -200,7 +200,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/ist-africa/commonui-components-africa' }
+      { icon: 'github', link: 'https://github.com/istafrica-JeaMu/commonui-components-africa' }
     ],
 
     footer: {

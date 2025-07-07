@@ -346,4 +346,4 @@ Components automatically support Tailwind's dark mode:
 
 ---
 
-Need help? Check out our [component documentation](/docs/components/) or [open an issue](https://github.com/ist-africa/commonui-components-africa/issues) on GitHub. 
+Need help? Check out our [component documentation](/docs/components/) or [open an issue](https://github.com/istafrica-JeaMu/commonui-components-africa/issues) on GitHub. 

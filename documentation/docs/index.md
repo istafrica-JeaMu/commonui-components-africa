@@ -95,7 +95,7 @@ Get started with our most commonly used components:
 
 ## 🤝 Community & Support
 
-- **GitHub**: [commonui-components-africa](https://github.com/ist-africa/commonui-components-africa)
+- **GitHub**: [commonui-components-africa](https://github.com/istafrica-JeaMu/commonui-components-africa)
 - **Issues**: Report bugs and request features
 - **Discussions**: Join our community discussions
 
