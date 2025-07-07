@@ -8,7 +8,26 @@
 
 ## Interactive Demo
 
-<ButtonDemo />
+<script setup>
+import RuneButton from '@lib/components/Inputs/RuneButton.vue';
+</script>
+
+<div class="mt-5 flex text-sm flex-col items-center space-y-5 border border-gray-300 p-5 rounded-md bg-gray-50">
+  <div class="flex flex-row w-full min-h-7 justify-between">
+    <span class="self-start italic text-xs font-medium text-gray-600">Live Component Preview</span>
+  </div>
+
+  <!-- Component Preview -->
+  <div class="flex flex-col items-center align-middle place-items-center border border-gray-300 p-8 bg-white rounded-md w-full min-h-[200px]">
+    <div class="w-full flex items-center justify-center self-center">
+      <RuneButton 
+        text="Click me!" 
+        variant="primary" 
+        wcag-label="Interactive button demo"
+      />
+    </div>
+  </div>
+</div>
 
 ## Guidelines
 
@@ -69,6 +88,14 @@ import { RuneButton } from '@ist/commonui-components-africa'
 
 ### Variants
 
+<div class="flex flex-wrap gap-4 mb-6">
+  <RuneButton variant="primary" text="Primary" wcag-label="Primary button" />
+  <RuneButton variant="secondary" text="Secondary" wcag-label="Secondary button" />
+  <RuneButton variant="tertiary" text="Tertiary" wcag-label="Tertiary button" />
+  <RuneButton variant="danger" text="Danger" wcag-label="Danger button" />
+  <RuneButton variant="success" text="Success" wcag-label="Success button" />
+</div>
+
 ```vue
 <template>
   <div class="flex flex-wrap gap-4">
@@ -83,6 +110,12 @@ import { RuneButton } from '@ist/commonui-components-africa'
 
 ### Sizes
 
+<div class="flex flex-wrap items-center gap-4 mb-6">
+  <RuneButton size="sm" text="Small" wcag-label="Small button" />
+  <RuneButton size="md" text="Medium" wcag-label="Medium button" />
+  <RuneButton size="lg" text="Large" wcag-label="Large button" />
+</div>
+
 ```vue
 <template>
   <div class="flex flex-wrap items-center gap-4">
@@ -94,6 +127,23 @@ import { RuneButton } from '@ist/commonui-components-africa'
 ```
 
 ### With Icons
+
+<div class="flex flex-wrap gap-4 mb-6">
+  <RuneButton 
+    text="Left Icon" 
+    :icon="{ left: 'arrow-left' }" 
+    wcag-label="Button with left icon"
+  />
+  <RuneButton 
+    text="Right Icon" 
+    :icon="{ right: 'arrow-right' }" 
+    wcag-label="Button with right icon"
+  />
+  <RuneButton 
+    :icon="{ center: 'plus' }" 
+    wcag-label="Icon only button"
+  />
+</div>
 
 ```vue
 <template>
@@ -118,6 +168,21 @@ import { RuneButton } from '@ist/commonui-components-africa'
 
 ### Loading States
 
+<div class="flex flex-wrap gap-4 mb-6">
+  <RuneButton 
+    text="Loading Right" 
+    :loading="true"
+    loading-placement="right"
+    wcag-label="Button with loading state"
+  />
+  <RuneButton 
+    text="Loading Left" 
+    :loading="true"
+    loading-placement="left"
+    wcag-label="Button with loading state"
+  />
+</div>
+
 ```vue
 <template>
   <div class="flex flex-wrap gap-4">
@@ -138,6 +203,20 @@ import { RuneButton } from '@ist/commonui-components-africa'
 ```
 
 ### Disabled State
+
+<div class="flex flex-wrap gap-4 mb-6">
+  <RuneButton 
+    text="Disabled Button" 
+    :disabled="true"
+    wcag-label="Disabled button"
+  />
+  <RuneButton 
+    variant="secondary"
+    text="Disabled Secondary" 
+    :disabled="true"
+    wcag-label="Disabled secondary button"
+  />
+</div>
 
 ```vue
 <template>
@@ -161,24 +240,20 @@ import { RuneButton } from '@ist/commonui-components-africa'
 
 Available for Secondary and Tertiary variants only:
 
-```vue
-<template>
-  <div class="flex flex-wrap gap-4">
-    <RuneButton 
-      variant="secondary"
-      text="Faded Secondary" 
-      :faded="true"
-      wcag-label="Faded secondary button"
-    />
-    <RuneButton 
-      variant="tertiary"
-      text="Faded Tertiary" 
-      :faded="true"
-      wcag-label="Faded tertiary button"
-    />
-  </div>
-</template>
-```
+<div class="flex flex-wrap gap-4 mb-6">
+  <RuneButton 
+    variant="secondary"
+    text="Faded Secondary" 
+    :faded="true"
+    wcag-label="Faded secondary button"
+  />
+  <RuneButton 
+    variant="tertiary"
+    text="Faded Tertiary" 
+    :faded="true"
+    wcag-label="Faded tertiary button"
+  />
+</div>
 
 ## Accessibility
 

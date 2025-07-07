@@ -6,7 +6,7 @@ import RuneButton from '@lib/components/Inputs/RuneButton.vue';
 type PropOption = {
   displayedText?: string; // Replaces property name with a custom one.
   modelValue?: any; // the model for the property.
-  render: boolean; // If false, excludes the property from the interactive props section.
+  render?: boolean; // If false, excludes the property from the interactive props section.
   type: 'boolean' | 'string' | 'union' | 'unionarray' | 'number' | 'function'; // Property type.
   value: any; // Default value of the prop.
   values?: any[]; // Selection of possible values for the prop.
@@ -107,146 +107,214 @@ const openModal = ref(false);
 </script>
 
 <template>
-  <Teleport to="body" :disabled="!openModal">
-    <div
-      class="mt-5 flex text-sm flex-col items-center space-y-5 border border-gray-300 p-5"
-      :class="openModal ? 'fixed top-0 left-0 bottom-0 right-0 bg-white z-50' : ''"
-    >
-      <div class="flex flex-row w-full min-h-7 justify-between">
-        <span class="self-start italic text-xs">Interactive Props</span>
-        <RuneButton
-          class="self-end"
-          size="sm"
-          wcag-label="Toggle modal"
-          text="Toggle full screen"
-          variant="secondary"
-          @click="openModal = !openModal"
-        />
-      </div>
-      <!-- Boolean props row -->
-      <div class="!m-0 flex w-full flex-wrap justify-center gap-y-4 space-x-4">
-        <div
-          v-for="[propName, boolProps] in booleanProps"
-          :key="propName"
-          class="flex items-center space-x-2"
-        >
-          <template v-if="boolProps.render || boolProps.render === undefined">
-            <input
-              v-model="dynamicProps[propName]"
-              type="checkbox"
-              :id="`prop-${propName}`"
-              class="rounded border-gray-300"
-            />
-            <label :for="`prop-${propName}`" class="text-sm">
-              {{ boolProps.displayedText || propName }}
-            </label>
-          </template>
-        </div>
-
-        <!-- Function props row -->
-        <div
-          v-for="[propName, funcProps] in functionProps"
-          :key="`func-${propName}`"
-          class="flex items-center space-x-2 text-slate-800 bg-slate-100 rounded-sm p-1"
-        >
-          <template v-if="funcProps.render || funcProps.render === undefined">
-            <span class="text-xs">⚠️</span>
-            <input
-              type="checkbox"
-              :id="`func-${propName}`"
-              class="rounded border-gray-300"
-              @change="dynamicProps[propName] = $event.target.checked ? funcProps.value : null"
-            />
-            <label :for="`func-${propName}`" class="text-sm">
-              {{ funcProps.displayedText || propName }}
-            </label>
-          </template>
-        </div>
-
-        <!-- Number props row -->
-        <div
-          v-for="[propName, numProps] in numberProps"
-          :key="`number-${propName}`"
-          class="flex items-center space-x-2"
-        >
-          <template v-if="numProps.render || numProps.render === undefined">
-            <label :for="`num-${propName}`" class="text-sm">
-              {{ numProps.displayedText || propName }}
-            </label>
-            <input
-              v-model.number="dynamicProps[propName]"
-              type="number"
-              :id="`num-${propName}`"
-              class="rounded border-gray-300 px-2 py-1 text-sm w-20"
-            />
-          </template>
-        </div>
-
-        <!-- String props row -->
-        <div
-          v-for="[propName, strProps] in stringProps"
-          :key="propName"
-          class="flex items-center space-x-2"
-        >
-          <template v-if="strProps.render || strProps.render === undefined">
-            <label :for="`str-${propName}`" class="text-sm">
-              {{ strProps.displayedText || propName }}
-            </label>
-            <input
-              v-model="dynamicProps[propName]"
-              type="text"
-              :id="`str-${propName}`"
-              class="rounded border-gray-300 px-2 py-1 text-sm"
-            />
-          </template>
-        </div>
-
-        <!-- Union (dropdown) props row -->
-        <div
-          v-for="[propName, option] in unionProps"
-          :key="propName"
-          class="flex items-center space-x-2"
-        >
-          <template v-if="option.render || option.render === undefined">
-            <label :for="`union-${propName}`" class="text-sm">
-              {{ option.displayedText || propName }}
-            </label>
-            <select
-              v-model="dynamicProps[propName]"
-              :id="`union-${propName}`"
-              class="rounded border-gray-300 px-2 py-1 text-sm"
-            >
-              <option v-for="val in option.values" :key="val" :value="val">
-                {{ val || 'undefined' }}
-              </option>
-            </select>
-          </template>
-        </div>
-      </div>
-      <div class="flex flex-row w-full min-h-7 justify-between">
-        <span class="self-start italic text-xs">Rendered Component</span>
-        <RuneButton
-          class="focus-visible:outline-orange-600"
-          wcag-label="Reset props"
-          text="Reset"
-          size="sm"
-          faded
-          variant="secondary"
-          @click="handleReset"
-        />
-      </div>
-
-      <div
-        id="renderBox"
-        class="will-change-transform flex flex-col items-center align-middle place-items-center border border-gray-300 p-5 overflow-auto w-full"
+  <div class="mt-5 flex text-sm flex-col items-center space-y-5 border border-gray-300 p-5 rounded-md bg-gray-50">
+    <div class="flex flex-row w-full min-h-7 justify-between">
+      <span class="self-start italic text-xs font-medium text-gray-600">Interactive Props</span>
+      <button
+        class="self-end px-3 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded border text-gray-700"
+        @click="openModal = !openModal"
       >
-        <div
-          id="renderItem"
-          class="w-full flex m-auto items-center justify-center self-center"
-          :style="{ minWidth: props.width, minHeight: props.height }"
-        >
-          <div id="renderSlot" class="w-full flex items-center justify-center self-center">
-            <slot :props="dynamicProps" :model-value="model" />
+        {{ openModal ? 'Exit Fullscreen' : 'Fullscreen' }}
+      </button>
+    </div>
+
+    <!-- Props Controls -->
+    <div class="!m-0 flex w-full flex-wrap justify-center gap-y-4 space-x-4">
+      <!-- Boolean props -->
+      <div
+        v-for="[propName, boolProps] in booleanProps"
+        :key="propName"
+        class="flex items-center space-x-2"
+      >
+        <template v-if="boolProps.render !== false">
+          <label class="flex items-center space-x-2 cursor-pointer">
+            <input
+              v-model="dynamicProps[propName]"
+              type="checkbox"
+              class="rounded border-gray-300"
+            />
+            <span class="text-sm">{{ boolProps.displayedText || propName }}</span>
+          </label>
+        </template>
+      </div>
+
+      <!-- String props -->
+      <div
+        v-for="[propName, strProps] in stringProps"
+        :key="propName"
+        class="flex flex-col space-y-1"
+      >
+        <template v-if="strProps.render !== false">
+          <label class="text-xs font-medium text-gray-600">
+            {{ strProps.displayedText || propName }}
+          </label>
+          <input
+            v-model="dynamicProps[propName]"
+            type="text"
+            class="px-2 py-1 border border-gray-300 rounded text-sm w-32"
+          />
+        </template>
+      </div>
+
+      <!-- Union/Select props -->
+      <div
+        v-for="[propName, option] in unionProps"
+        :key="propName"
+        class="flex flex-col space-y-1"
+      >
+        <template v-if="option.render !== false">
+          <label class="text-xs font-medium text-gray-600">
+            {{ option.displayedText || propName }}
+          </label>
+          <select
+            v-model="dynamicProps[propName]"
+            class="px-2 py-1 border border-gray-300 rounded text-sm w-32"
+          >
+            <option v-for="value in option.values" :key="value" :value="value">
+              {{ value }}
+            </option>
+          </select>
+        </template>
+      </div>
+
+      <!-- Function props (special handling for icon) -->
+      <div
+        v-for="[propName, funcProps] in functionProps"
+        :key="`func-${propName}`"
+        class="flex items-center space-x-2 text-slate-800 bg-slate-100 rounded-sm p-2"
+      >
+        <template v-if="funcProps.render !== false">
+          <label class="flex items-center space-x-2 cursor-pointer">
+            <input
+              type="checkbox"
+              class="rounded border-gray-300"
+              @change="dynamicProps[propName] = $event.target.checked ? funcProps.value : undefined"
+            />
+            <span class="text-sm">{{ funcProps.displayedText || propName }}</span>
+          </label>
+        </template>
+      </div>
+    </div>
+
+    <div class="flex flex-row w-full min-h-7 justify-between">
+      <span class="self-start italic text-xs font-medium text-gray-600">Rendered Component</span>
+      <button
+        class="px-3 py-1 text-xs bg-gray-200 hover:bg-gray-300 rounded border text-gray-700"
+        @click="handleReset"
+      >
+        Reset
+      </button>
+    </div>
+
+    <!-- Component Preview -->
+    <div class="flex flex-col items-center align-middle place-items-center border border-gray-300 p-8 bg-white rounded-md w-full min-h-[200px]">
+      <div class="w-full flex items-center justify-center self-center">
+        <slot :props="dynamicProps" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Modal -->
+  <Teleport to="body" v-if="openModal">
+    <div class="fixed inset-0 bg-white z-50 p-8 overflow-auto">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-2xl font-bold">Interactive Component Demo</h2>
+          <button
+            class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded text-gray-700"
+            @click="openModal = false"
+          >
+            Exit Fullscreen
+          </button>
+        </div>
+        
+        <!-- Same controls as above but in fullscreen -->
+        <div class="space-y-8">
+          <div class="border border-gray-300 p-6 rounded-md bg-gray-50">
+            <h3 class="text-lg font-semibold mb-4">Component Properties</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Boolean props -->
+              <div
+                v-for="[propName, boolProps] in booleanProps"
+                :key="propName"
+                class="flex items-center space-x-2"
+              >
+                <template v-if="boolProps.render !== false">
+                  <label class="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      v-model="dynamicProps[propName]"
+                      type="checkbox"
+                      class="rounded border-gray-300"
+                    />
+                    <span>{{ boolProps.displayedText || propName }}</span>
+                  </label>
+                </template>
+              </div>
+
+              <!-- String props -->
+              <div
+                v-for="[propName, strProps] in stringProps"
+                :key="propName"
+                class="flex flex-col space-y-1"
+              >
+                <template v-if="strProps.render !== false">
+                  <label class="font-medium text-gray-700">
+                    {{ strProps.displayedText || propName }}
+                  </label>
+                  <input
+                    v-model="dynamicProps[propName]"
+                    type="text"
+                    class="px-3 py-2 border border-gray-300 rounded"
+                  />
+                </template>
+              </div>
+
+              <!-- Union props -->
+              <div
+                v-for="[propName, option] in unionProps"
+                :key="propName"
+                class="flex flex-col space-y-1"
+              >
+                <template v-if="option.render !== false">
+                  <label class="font-medium text-gray-700">
+                    {{ option.displayedText || propName }}
+                  </label>
+                  <select
+                    v-model="dynamicProps[propName]"
+                    class="px-3 py-2 border border-gray-300 rounded"
+                  >
+                    <option v-for="value in option.values" :key="value" :value="value">
+                      {{ value }}
+                    </option>
+                  </select>
+                </template>
+              </div>
+
+              <!-- Function props -->
+              <div
+                v-for="[propName, funcProps] in functionProps"
+                :key="`func-${propName}`"
+                class="flex items-center space-x-2 bg-slate-100 rounded p-3"
+              >
+                <template v-if="funcProps.render !== false">
+                  <label class="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      class="rounded border-gray-300"
+                      @change="dynamicProps[propName] = $event.target.checked ? funcProps.value : undefined"
+                    />
+                    <span>{{ funcProps.displayedText || propName }}</span>
+                  </label>
+                </template>
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-gray-300 p-8 rounded-md bg-white">
+            <h3 class="text-lg font-semibold mb-4">Component Preview</h3>
+            <div class="flex items-center justify-center min-h-[300px]">
+              <slot :props="dynamicProps" />
+            </div>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ export function useLiveCodeFor(
     const propsFormatted = Reflect.ownKeys(jsProps)
       .map((key) => {
         const value = jsProps[key];
-        if (value === null) return '';
+        if (value === null || value === undefined) return '';
 
         const formattedValue = formatValue(value);
         const hyphenatedKey = hyphenate(String(key));
