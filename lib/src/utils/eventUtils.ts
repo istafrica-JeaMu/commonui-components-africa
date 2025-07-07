@@ -17,7 +17,7 @@ export function isClickOutside(event: Event, element: HTMLElement): boolean {
  * Get keyboard key from event
  */
 export function getKeyFromEvent(event: KeyboardEvent): string {
-  return event.key || event.which || event.keyCode;
+  return event.key || String(event.which || event.keyCode);
 }
 
 /**

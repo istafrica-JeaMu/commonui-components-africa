@@ -68,4 +68,82 @@ temp/
 *.tgz
 
 # Yarn Integrity file
-.yarn-integrity 
+.yarn-integrity
+
+# Build analysis and stats
+stats.html
+bundle-analyzer-report.html
+
+# TypeScript
+*.tsbuildinfo
+
+# Vitest
+coverage/
+test-results/
+playwright-report/
+test-report/
+
+# Documentation builds
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+
+# Husky
+.husky/_/
+
+# Lock files (keep pnpm-lock.yaml but ignore others in case of switching)
+package-lock.json
+yarn.lock
+
+# Editor directories and files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local development
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Storybook
+storybook-static/
+
+# Auto-generated files
+auto-imports.d.ts
+components.d.ts
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Turborepo
+.turbo/
+
+# Vercel
+.vercel/
+
+# Netlify
+.netlify/
+
+# Local Netlify folder
+.netlify
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test/
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.* 

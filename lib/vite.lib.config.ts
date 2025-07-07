@@ -16,9 +16,9 @@ export default defineConfig({
     cssCodeSplit: false,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: '@ist/commonui-components-africa',
-      formats: ['es'], // adding 'umd' requires globals set to every external module
-      fileName: (format, name) => `${name}.js`,
+      name: 'CommonUIComponentsAfrica',
+      formats: ['es', 'cjs'], // ES modules and CommonJS
+      fileName: (format, name) => `${name}.${format}.js`,
     },
     rollupOptions: {
       // external modules won't be bundled into your library
@@ -34,7 +34,6 @@ export default defineConfig({
       treeshake: false,
       output: {
         compact: true,
-        format: 'cjs',
         preserveModules: true,
         preserveModulesRoot: 'src',
         inlineDynamicImports: false,

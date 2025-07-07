@@ -33,7 +33,7 @@ const theme = ref<MessagePassThroughOptions>({
          dark:p-warn:border-yellow-800 dark:p-warn:bg-yellow-950 dark:p-warn:text-yellow-200
          dark:p-error:border-red-800 dark:p-error:bg-red-950 dark:p-error:text-red-200
          dark:p-secondary:border-gray-800 dark:p-secondary:bg-gray-950 dark:p-secondary:text-gray-200`,
-  wrapper: `flex items-center gap-2`,
+
   icon: `flex-shrink-0 w-4 h-4`,
   text: `flex-1`,
   closeButton: `ml-auto -mx-1.5 -my-1.5 rounded-lg focus:ring-2 p-1.5 hover:bg-gray-100 
