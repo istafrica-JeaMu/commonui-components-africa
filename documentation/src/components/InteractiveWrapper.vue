@@ -16,17 +16,17 @@ type PropOption = {
 
 type PropOptionsRecord = Record<string, PropOption>;
 
-type Props = {
-  propsOptions: Record<string, PropOption>;
+interface Props {
+  propsOptions: PropOptionsRecord;
   width?: string;
   height?: string;
-};
+}
 
 const body = ref<HTMLElement>();
 const props = defineProps<Props>();
 const model = defineModel<any>();
 const emit = defineEmits<{
-  (e: 'propsChanged', newProps: string): void;
+  propsChanged: [newProps: string];
   (e: 'on-reset'): void;
 }>();
 const { propsOptions } = toRefs(reactive(props));
@@ -79,13 +79,10 @@ function handleReset() {
 
 watch(
   dynamicProps,
-  (newProps, oldProps) => {
-    // Compare newProps to oldProps and only emit if there are changes
-    if (JSON.stringify(newProps) === JSON.stringify(oldProps)) return;
-
+  (newProps) => {
     emit('propsChanged', JSON.stringify(newProps));
   },
-  { immediate: true },
+  { immediate: true, deep: true },
 );
 
 onMounted(() => {
@@ -188,7 +185,7 @@ const openModal = ref(false);
             <input
               type="checkbox"
               class="rounded border-gray-300"
-              @change="dynamicProps[propName] = $event.target.checked ? funcProps.value : undefined"
+              @change="dynamicProps[propName] = ($event.target as HTMLInputElement).checked ? funcProps.value : undefined"
             />
             <span class="text-sm">{{ funcProps.displayedText || propName }}</span>
           </label>
@@ -301,7 +298,7 @@ const openModal = ref(false);
                     <input
                       type="checkbox"
                       class="rounded border-gray-300"
-                      @change="dynamicProps[propName] = $event.target.checked ? funcProps.value : undefined"
+                      @change="dynamicProps[propName] = ($event.target as HTMLInputElement).checked ? funcProps.value : undefined"
                     />
                     <span>{{ funcProps.displayedText || propName }}</span>
                   </label>

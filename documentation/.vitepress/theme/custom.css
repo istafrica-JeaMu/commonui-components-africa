@@ -1,0 +1,63 @@
+/* Custom VitePress theme styles */
+
+/* Interactive wrapper styling */
+.interactive-wrapper {
+  @apply mt-6 mb-8;
+}
+
+/* TipBlock styling adjustments */
+.vp-doc .tip-block {
+  @apply my-6;
+}
+
+/* API documentation table styling */
+.api-documentation table {
+  @apply text-sm;
+}
+
+.api-documentation th {
+  @apply bg-gray-900 text-white font-semibold;
+}
+
+.api-documentation td {
+  @apply border-b border-gray-200;
+}
+
+/* Component examples styling */
+.component-examples .example-section {
+  @apply mb-8;
+}
+
+.component-examples .example-section h3 {
+  @apply text-lg font-semibold mb-4;
+}
+
+/* Live code section */
+.vp-doc details {
+  @apply mt-4 mb-6;
+}
+
+.vp-doc details summary {
+  @apply font-medium cursor-pointer;
+}
+
+/* Feedback section styling */
+.feedback-list {
+  @apply mt-8;
+}
+
+/* Button component demo styling */
+.button-demo {
+  @apply p-6 border border-gray-200 rounded-lg bg-white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .api-documentation table {
+    @apply text-xs;
+  }
+  
+  .component-examples .flex {
+    @apply flex-col space-y-2;
+  }
+} 

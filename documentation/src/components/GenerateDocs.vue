@@ -10,25 +10,93 @@ type GenerateDocsProps = {
 
 const props = defineProps<GenerateDocsProps>();
 
-const tableHeadStyle = 'whitespace-nowrap !bg-slate-800 !text-white text-sm font-semibold border-r';
+const tableHeadStyle = 'whitespace-nowrap !bg-slate-800 !text-white text-sm font-semibold border-r px-4 py-3';
 
-// For now, we'll create a simplified version that shows basic component info
-// In a full implementation, this would extract props, events, and slots from the component
+// RuneButton specific props information
 const getComponentInfo = (component: Component) => {
+  const componentName = component.name || 'RuneButton';
+  
+  if (componentName === 'RuneButton') {
+    return {
+      name: 'RuneButton',
+      props: [
+        { 
+          name: 'disabled', 
+          type: 'boolean', 
+          required: false, 
+          default: 'false',
+          description: 'Whether the button is disabled or not'
+        },
+        { 
+          name: 'faded', 
+          type: 'boolean', 
+          required: false, 
+          default: 'false',
+          description: 'Changes hover background opacity for style. Only for secondary and tertiary'
+        },
+        { 
+          name: 'icon', 
+          type: 'ButtonIconType', 
+          required: false, 
+          default: 'undefined',
+          description: 'Adds an icon based on the options provided as the value property or the component'
+        },
+        { 
+          name: 'loading', 
+          type: 'boolean', 
+          required: false, 
+          default: 'false',
+          description: 'Puts the button in a state based on the placement configuration in the spinner. Should be placed there or inside the button'
+        },
+        { 
+          name: 'loadingPlacement', 
+          type: "'left' | 'right'", 
+          required: false, 
+          default: '"right"',
+          description: 'Set placement of the loading spinner and optimally place contents to minimize layout shift'
+        },
+        { 
+          name: 'size', 
+          type: "'sm' | 'md' | 'lg'", 
+          required: false, 
+          default: '"md"',
+          description: 'Sets the button\'s size'
+        },
+        { 
+          name: 'text', 
+          type: 'string', 
+          required: false, 
+          default: 'undefined',
+          description: 'Sets the button text content'
+        },
+        { 
+          name: 'variant', 
+          type: "'primary' | 'secondary' | 'tertiary' | 'danger' | 'success'", 
+          required: false, 
+          default: '"primary"',
+          description: 'Sets the button\'s color variant'
+        },
+        { 
+          name: 'wcagLabel', 
+          type: 'string', 
+          required: true, 
+          default: 'Required',
+          description: 'Accessibility label for screen readers'
+        },
+      ],
+      events: [
+        { name: 'click', description: 'Emitted when the button is clicked' },
+      ],
+      slots: []
+    };
+  }
+  
+  // Default fallback
   return {
-    name: component.name || 'Unknown Component',
-    props: [
-      { name: 'variant', type: 'string', required: false, default: 'primary' },
-      { name: 'size', type: 'string', required: false, default: 'md' },
-      { name: 'disabled', type: 'boolean', required: false, default: false },
-      { name: 'wcagLabel', type: 'string', required: true, default: 'Required' },
-    ],
-    events: [
-      { name: 'click', description: 'Triggered when component is clicked' },
-    ],
-    slots: [
-      { name: 'default', description: 'Default slot content' },
-    ]
+    name: componentName,
+    props: [],
+    events: [],
+    slots: []
   };
 };
 
@@ -36,74 +104,83 @@ const componentInfo = getComponentInfo(props.component);
 </script>
 
 <template>
-  <div>
-    <div v-if="componentInfo.props?.length">
-      <h3 id="props" tabindex="-1">
-        Props 
-        <a class="header-anchor" href="#props" aria-label="Permalink to props" />
-      </h3>
-      <table class="rounded-t-md w-fit shadow-md">
+  <div class="api-documentation">
+    <h3 id="props" class="text-xl font-semibold mb-4">Props</h3>
+    
+    <div v-if="componentInfo.props?.length" class="overflow-x-auto">
+      <table class="min-w-full border border-gray-300 rounded-lg shadow-sm">
         <thead>
           <tr>
             <th :class="tableHeadStyle">Name</th>
             <th :class="tableHeadStyle">Type</th>
-            <th :class="tableHeadStyle">Required</th>
             <th :class="tableHeadStyle">Default</th>
-            <th :class="tableHeadStyle">Description</th>
+            <th :class="tableHeadStyle">Required</th>
+            <th :class="tableHeadStyle + ' border-r-0'">Description</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="prop in componentInfo.props" :key="prop.name" class="border-b">
-            <td class="px-4 py-2 font-mono text-sm">{{ prop.name }}</td>
-            <td class="px-4 py-2 font-mono text-sm">{{ prop.type }}</td>
-            <td class="px-4 py-2 text-sm">{{ prop.required ? 'Yes' : 'No' }}</td>
-            <td class="px-4 py-2 font-mono text-sm">{{ prop.default }}</td>
-            <td class="px-4 py-2 text-sm">Component property</td>
+        <tbody class="bg-white">
+          <tr v-for="(prop, index) in componentInfo.props" :key="prop.name" 
+              :class="['border-b border-gray-200', index % 2 === 0 ? 'bg-gray-50' : 'bg-white']">
+            <td class="px-4 py-3 font-mono text-sm font-medium text-blue-600 border-r border-gray-200">
+              {{ prop.name }}
+            </td>
+            <td class="px-4 py-3 font-mono text-sm text-gray-700 border-r border-gray-200">
+              {{ prop.type }}
+            </td>
+            <td class="px-4 py-3 font-mono text-sm text-gray-600 border-r border-gray-200">
+              {{ prop.default }}
+            </td>
+            <td class="px-4 py-3 text-sm text-center border-r border-gray-200">
+              <span v-if="prop.required" class="text-red-600 font-medium">Yes</span>
+              <span v-else class="text-gray-500">No</span>
+            </td>
+            <td class="px-4 py-3 text-sm text-gray-700">
+              {{ prop.description }}
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <div v-if="componentInfo.events?.length" class="mt-6">
-      <h3 id="events" tabindex="-1">
-        Events 
-        <a class="header-anchor" href="#events" aria-label="Permalink to events" />
-      </h3>
-      <table class="rounded-t-md w-fit shadow-md">
+    <div v-if="componentInfo.events?.length" class="mt-8">
+      <h3 id="events" class="text-xl font-semibold mb-4">Events</h3>
+      <table class="min-w-full border border-gray-300 rounded-lg shadow-sm">
         <thead>
           <tr>
             <th :class="tableHeadStyle">Name</th>
-            <th :class="tableHeadStyle">Description</th>
+            <th :class="tableHeadStyle + ' border-r-0'">Description</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="event in componentInfo.events" :key="event.name" class="border-b">
-            <td class="px-4 py-2 font-mono text-sm">{{ event.name }}</td>
-            <td class="px-4 py-2 text-sm">{{ event.description }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div v-if="componentInfo.slots?.length" class="mt-6">
-      <h3 id="slots" tabindex="-1">
-        Slots 
-        <a class="header-anchor" href="#slots" aria-label="Permalink to slots" />
-      </h3>
-      <table class="rounded-t-md w-fit shadow-md">
-        <thead>
-          <tr>
-            <th :class="tableHeadStyle">Name</th>
-            <th :class="tableHeadStyle">Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="slot in componentInfo.slots" :key="slot.name" class="border-b">
-            <td class="px-4 py-2 font-mono text-sm">{{ slot.name }}</td>
-            <td class="px-4 py-2 text-sm">{{ slot.description }}</td>
+        <tbody class="bg-white">
+          <tr v-for="(event, index) in componentInfo.events" :key="event.name"
+              :class="['border-b border-gray-200', index % 2 === 0 ? 'bg-gray-50' : 'bg-white']">
+            <td class="px-4 py-3 font-mono text-sm font-medium text-blue-600 border-r border-gray-200">
+              {{ event.name }}
+            </td>
+            <td class="px-4 py-3 text-sm text-gray-700">
+              {{ event.description }}
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-</template> 
+</template>
+
+<style scoped>
+.api-documentation {
+  @apply mt-6;
+}
+
+.api-documentation table {
+  @apply w-full border-collapse;
+}
+
+.api-documentation th {
+  @apply text-left;
+}
+
+.api-documentation td {
+  @apply align-top;
+}
+</style> 
