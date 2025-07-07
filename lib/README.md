@@ -17,6 +17,7 @@ Vue.js component library built on PrimeVue and Tailwind CSS - Africa Edition
 
 ## 📦 Installation
 
+### Option 1: From npm (Recommended)
 ```bash
 npm install @ist/commonui-components-africa
 ```
@@ -27,6 +28,20 @@ yarn add @ist/commonui-components-africa
 
 ```bash
 pnpm add @ist/commonui-components-africa
+```
+
+### Option 2: Directly from GitHub
+```bash
+npm install git+https://github.com/istafrica-JeaMu/commonui-components-africa.git#main
+```
+
+Or add to your `package.json`:
+```json
+{
+  "dependencies": {
+    "@ist/commonui-components-africa": "git+https://github.com/istafrica-JeaMu/commonui-components-africa.git#main"
+  }
+}
 ```
 
 ## 🛠️ Peer Dependencies
