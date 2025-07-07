@@ -1,0 +1,11 @@
+import { Plugin } from 'vue';
+import './style.css';
+declare const plugin: Plugin;
+export default plugin;
+export * from './components';
+export * from './composables';
+export * from './components/types';
+export * from './utils/dateUtils';
+export * from './utils/slotsUtils';
+export * from './utils';
+export * from './volt';
