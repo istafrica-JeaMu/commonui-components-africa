@@ -1,0 +1,2 @@
+# This file ensures the Labels directory is tracked by git
+# Components will be created here: BaseBadge, BaseTag, BaseStatusLabel, etc. 

@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+@import 'tailwindcss-primeui';
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
+
+/* Theme */
+:root {
+  --p-inputtext-padding-y: 8px !important;
+  --p-inputtext-padding-x: 12px !important;
+}
+
+.p-inputtext {
+  font-size: 12px !important;
+} 

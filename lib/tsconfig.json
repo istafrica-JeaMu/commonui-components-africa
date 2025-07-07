@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": false,
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["ES2019", "dom"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist",
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "types": ["vite/client"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "src/components/**/*.ts",
+    "src/components/**/*.vue",
+    "src/composables/**/*.ts",
+    "src/utils/**/*.ts",
+    "src/volt/**/*.ts",
+    "src/volt/**/*.vue",
+    "src/volt/**/*.d.ts",
+    "src/index.ts",
+    "src/env.d.ts",
+    "src/**/*.d.ts"
+  ]
+} 

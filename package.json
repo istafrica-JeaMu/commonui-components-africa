@@ -1,0 +1,22 @@
+{
+  "name": "commonui-components-africa",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Africa team's version of the commonui-components project",
+  "scripts": {
+    "docs:dev": "pnpm --filter ./documentation run dev",
+    "docs:build": "pnpm --filter ./documentation run build",
+    "docs:preview": "pnpm --filter ./documentation run preview",
+    "lib:deploy": "pnpm --filter ./lib run build && pnpm --filter ./lib run deploy",
+    "lib:test": "pnpm --filter ./lib run test",
+    "lib:test:debug": "pnpm --filter ./lib run test:debug",
+    "lib:test:watch": "pnpm --filter ./lib run test:watch",
+    "lib:test:coverage": "pnpm --filter ./lib run test:coverage",
+    "mcp:start": "pnpm --filter ./mcp-server run start",
+    "mcp:dev": "pnpm --filter ./mcp-server run dev"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0"
+  }
+} 

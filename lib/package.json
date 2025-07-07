@@ -1,0 +1,92 @@
+{
+  "name": "@ist/commonui-components-africa",
+  "version": "1.0.0",
+  "author": {
+    "name": "Africa Team",
+    "email": "africa-team@ist.com"
+  },
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      }
+    },
+    "./style.css": "./dist/assets/style.css"
+  },
+  "typings": "./dist/index.d.ts",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "rimraf dist && pnpm install && vue-tsc --p tsconfig.json --emitDeclarationOnly && vite build --config vite.lib.config.ts --base=/commonui-components-africa --mode=production",
+    "deploy": "git tag -a v$(node -p \"require('./package.json').version.split('+')[0]\") -m 'version v$(node -p \"require('./package.json').version.split('+')[0]\")' && git push origin v$(node -p \"require('./package.json').version.split('+')[0]\") && pnpm publish",
+    "preview": "vite preview",
+    "test": "vitest --run",
+    "test:ui": "vitest --ui --coverage.enabled=true",
+    "test:debug": "vitest --silent=false",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage || true",
+    "lint": "eslint src",
+    "lint:debug": "eslint src --debug",
+    "lint:fix": "eslint src --fix",
+    "tsc": "vue-tsc --p tsconfig.json",
+    "tsc:tests": "vue-tsc --p tests/tsconfig.json",
+    "pretty": "prettier --write src/**/*.{ts,vue} tests/**/*.spec.ts",
+    "prepare": "cd .. && husky install .husky"
+  },
+  "publishConfig": {
+    "registry": "http://artifactory.ist.com/artifactory/api/npm/npm-local/"
+  },
+  "peerDependencies": {
+    "@headlessui/vue": "^1.7.23",
+    "@heroicons/vue": "^2.1.5",
+    "vue": "^3.5.13",
+    "primevue": "^4.3.3",
+    "tailwindcss-primeui": "^0.6.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
+    "@tsconfig/node20": "20.1.5",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^22.9.0",
+    "@vitejs/plugin-vue": "^5.2.0",
+    "@vitest/browser": "^3.1.2",
+    "@vitest/coverage-v8": "^3.1.2",
+    "@vitest/ui": "3.1.2",
+    "@vue/eslint-config-prettier": "^10.1.0",
+    "@vue/eslint-config-typescript": "^14.1.4",
+    "@vue/test-utils": "^2.4.6",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.16.0",
+    "eslint-plugin-tailwindcss": "^4.0.0-alpha.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "husky": "^8.0.0",
+    "jsdom": "^25.0.1",
+    "lint-staged": "^15.2.10",
+    "playwright": "^1.48.2",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "rimraf": "^6.0.1",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "tailwindcss": "^4.1.4",
+    "typescript": "5.6.3",
+    "vite": "^6.3.5",
+    "vitest": "^3.1.2",
+    "vitest-browser-vue": "^0.2.0",
+    "vue-tsc": "2.2.10"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.6.12",
+    "@tailwindcss/vite": "^4.1.4",
+    "dompurify": "^3.2.0",
+    "maska": "^2.1.11",
+    "tailwind-merge": "^3.2.0"
+  }
+} 

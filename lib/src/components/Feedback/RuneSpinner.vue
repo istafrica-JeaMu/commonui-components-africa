@@ -1,0 +1,67 @@
+<script setup lang="ts">
+import { computed } from 'vue';
+
+type SpinnerProps = {
+  /**
+   * @description The color of the spinner.
+   */
+  color: 'slate' | 'white';
+
+  /**
+   * @description The size of the spinner.
+   */
+  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+  /**
+   * @description Whether the spinner is visible.
+   */
+  visible?: boolean;
+};
+
+const props = withDefaults(defineProps<SpinnerProps>(), {
+  visible: false,
+  color: 'slate',
+});
+
+const spinnerSize = computed(() => {
+  const sizeClasses = {
+    xs: 'size-4',
+    sm: 'size-5',
+    md: 'size-6',
+    lg: 'size-8',
+    xl: 'size-12',
+  };
+
+  return sizeClasses[props.size];
+});
+
+const spinnerColor = computed(() => {
+  const colorClasses = {
+    slate: '#1E293B',
+    white: 'white',
+  };
+
+  return colorClasses[props.color];
+});
+</script>
+
+<template>
+  <svg
+    v-show="visible"
+    class="animate-spin"
+    :class="spinnerSize"
+    viewBox="0 0 25 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      opacity="0.2"
+      d="M24.5 12C24.5 18.6274 19.1274 24 12.5 24C5.87258 24 0.5 18.6274 0.5 12C0.5 5.37258 5.87258 0 12.5 0C19.1274 0 24.5 5.37258 24.5 12ZM4.17087 12C4.17087 16.6001 7.89995 20.3291 12.5 20.3291C17.1001 20.3291 20.8291 16.6001 20.8291 12C20.8291 7.39995 17.1001 3.67087 12.5 3.67087C7.89995 3.67087 4.17087 7.39995 4.17087 12Z"
+      :fill="spinnerColor"
+    />
+    <path
+      d="M12.5 22.1646C12.5 23.1782 11.6735 24.0144 10.6717 23.8599C9.25924 23.6422 7.89203 23.1731 6.63654 22.47C4.84514 21.4667 3.34111 20.0206 2.26832 18.27C1.19553 16.5193 0.589859 14.5227 0.509251 12.4711C0.428644 10.4195 0.875791 8.38152 1.80792 6.55211C2.74005 4.7227 4.12599 3.16306 5.83316 2.02236C7.54033 0.881669 9.51163 0.198083 11.5585 0.0369917C13.6054 -0.1241 15.6593 0.242693 17.5239 1.10228C18.8307 1.70472 20.0138 2.53508 21.0202 3.54979C21.734 4.26952 21.5434 5.42959 20.7233 6.02542C19.9032 6.62125 18.766 6.41974 18.0053 5.74973C17.4022 5.21846 16.7229 4.77516 15.9871 4.43596C14.6929 3.83932 13.2672 3.58473 11.8465 3.69654C10.4258 3.80835 9.05752 4.28283 7.87258 5.07458C6.68765 5.86633 5.72568 6.94887 5.07869 8.21865C4.4317 9.48843 4.12134 10.903 4.17729 12.327C4.23324 13.751 4.65363 15.1369 5.39825 16.352C6.14286 17.5671 7.1868 18.5708 8.43021 19.2671C9.13711 19.663 9.89504 19.952 10.6794 20.1277C11.6685 20.3493 12.5 21.1509 12.5 22.1646Z"
+      :fill="spinnerColor"
+    />
+  </svg>
+</template> 

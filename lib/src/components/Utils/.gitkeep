@@ -1,0 +1,2 @@
+# This file ensures the Utils directory is tracked by git
+# Components will be created here: BaseDivider, BaseModal, etc. 
