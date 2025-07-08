@@ -14,7 +14,7 @@ const tableHeadStyle = 'whitespace-nowrap !bg-slate-800 !text-white text-sm font
 
 // RuneButton specific props information
 const getComponentInfo = (component: Component) => {
-  const componentName = component.name || 'RuneButton';
+  const componentName = component?.name || 'RuneButton';
   
   if (componentName === 'RuneButton') {
     return {
@@ -169,18 +169,19 @@ const componentInfo = getComponentInfo(props.component);
 
 <style scoped>
 .api-documentation {
-  @apply mt-6;
+  margin-top: 1.5rem;
 }
 
 .api-documentation table {
-  @apply w-full border-collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .api-documentation th {
-  @apply text-left;
+  text-align: left;
 }
 
 .api-documentation td {
-  @apply align-top;
+  vertical-align: top;
 }
 </style> 

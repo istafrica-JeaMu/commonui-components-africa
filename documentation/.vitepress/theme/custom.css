@@ -1,63 +1,77 @@
+@import 'tailwindcss';
+
 /* Custom VitePress theme styles */
 
 /* Interactive wrapper styling */
 .interactive-wrapper {
-  @apply mt-6 mb-8;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 /* TipBlock styling adjustments */
 .vp-doc .tip-block {
-  @apply my-6;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 /* API documentation table styling */
 .api-documentation table {
-  @apply text-sm;
+  font-size: 0.875rem;
 }
 
 .api-documentation th {
-  @apply bg-gray-900 text-white font-semibold;
+  background-color: #111827;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .api-documentation td {
-  @apply border-b border-gray-200;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 /* Component examples styling */
 .component-examples .example-section {
-  @apply mb-8;
+  margin-bottom: 2rem;
 }
 
 .component-examples .example-section h3 {
-  @apply text-lg font-semibold mb-4;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
 /* Live code section */
 .vp-doc details {
-  @apply mt-4 mb-6;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .vp-doc details summary {
-  @apply font-medium cursor-pointer;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 /* Feedback section styling */
 .feedback-list {
-  @apply mt-8;
+  margin-top: 2rem;
 }
 
 /* Button component demo styling */
 .button-demo {
-  @apply p-6 border border-gray-200 rounded-lg bg-white;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
 }
 
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .api-documentation table {
-    @apply text-xs;
+    font-size: 0.75rem;
   }
   
   .component-examples .flex {
-    @apply flex-col space-y-2;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 } 

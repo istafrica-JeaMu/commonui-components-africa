@@ -27,7 +27,7 @@ const props = defineProps<Props>();
 const model = defineModel<any>();
 const emit = defineEmits<{
   propsChanged: [newProps: string];
-  (e: 'on-reset'): void;
+  'on-reset': [];
 }>();
 const { propsOptions } = toRefs(reactive(props));
 const propsOptionsRecord: PropOptionsRecord = propsOptions.value;

@@ -101,70 +101,150 @@
 
 /* Button Base Styles */
 .btn {
-  @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:focus {
+  ring: 2px solid;
+  ring-offset: 2px;
 }
 
 /* Size Variants */
 .btn-sm {
-  @apply px-3 py-1.5 text-xs;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
 }
 
 .btn-md {
-  @apply px-4 py-2 text-sm;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
 }
 
 .btn-lg {
-  @apply px-6 py-3 text-base;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
 }
 
 /* Color Variants */
 .btn-primary {
-  @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
+  background-color: #2563eb;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-primary:focus {
+  ring-color: #3b82f6;
 }
 
 .btn-secondary {
-  @apply bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500;
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+.btn-secondary:hover {
+  background-color: #d1d5db;
+}
+
+.btn-secondary:focus {
+  ring-color: #6b7280;
 }
 
 .btn-tertiary {
-  @apply bg-transparent text-gray-700 border-gray-300 hover:bg-gray-50 focus:ring-gray-500;
+  background-color: transparent;
+  color: #374151;
+  border-color: #d1d5db;
+}
+
+.btn-tertiary:hover {
+  background-color: #f9fafb;
+}
+
+.btn-tertiary:focus {
+  ring-color: #6b7280;
 }
 
 .btn-danger {
-  @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+  background-color: #dc2626;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #b91c1c;
+}
+
+.btn-danger:focus {
+  ring-color: #ef4444;
 }
 
 .btn-success {
-  @apply bg-green-600 text-white hover:bg-green-700 focus:ring-green-500;
+  background-color: #059669;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #047857;
+}
+
+.btn-success:focus {
+  ring-color: #10b981;
 }
 
 /* State Variants */
 .btn-faded {
-  @apply opacity-60;
+  opacity: 0.6;
 }
 
 .btn:disabled {
-  @apply opacity-50 cursor-not-allowed;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .btn-icon {
-  @apply w-10 h-10 p-0;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
 }
 
 /* Icon and Spinner */
 .icon {
-  @apply inline-block w-4 h-4;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
 }
 
 .spinner {
-  @apply inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .btn .spinner {
-  @apply mr-2;
+  margin-right: 0.5rem;
 }
 
 .btn-icon .spinner {
-  @apply mr-0;
+  margin-right: 0;
 }
 </style> 

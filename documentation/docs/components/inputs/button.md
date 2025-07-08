@@ -5,49 +5,71 @@ import TipBlock from '@src/components/TipBlock.vue';
 import InteractiveWrapper from '@src/components/InteractiveWrapper.vue';
 import GenerateDocs from '@src/components/GenerateDocs.vue';
 import FeedbackList from '@src/components/FeedbackList.vue';
+// RuneButton is globally registered in VitePress theme, no need to import
+// import RuneButton from '../../../../lib/src/components/Inputs/RuneButton.vue';
 
 const propsAsJson = ref('');
 const { liveCode } = useLiveCodeFor('RuneButton', propsAsJson)
 
 const btnProps = {
   disabled: {
+    displayedText: 'Disabled',
     type: 'boolean',
     value: false,
+    render: true,
+  },
+  faded: {
+    displayedText: 'Faded (Secondary & Tertiary only)',
+    type: 'boolean',
+    value: false,
+    render: true,
   },
   icon: {
+    displayedText: 'Add Right Icon',
     type: 'function',
     value: {
-      right: 'arrow-long-right'
+      right: 'arrow-right'
     },
+    render: true,
   },
   loading: {
+    displayedText: 'Loading State',
     type: 'boolean',
     value: false,
+    render: true,
   },
   loadingPlacement: {
-    displayedText: 'Loading placement',
+    displayedText: 'Loading Placement',
     type: 'union',
     value: 'right',
-    values: ['left','right'],
+    values: ['left', 'right'],
+    render: true,
   },
   size: {
+    displayedText: 'Size',
     type: 'union',
     value: 'md',
     values: ['sm', 'md', 'lg'],
+    render: true,
   },
   text: {
+    displayedText: 'Button Text',
     type: 'string',
     value: 'Button text',
+    render: true,
   },
   variant: {
+    displayedText: 'Variant',
     type: 'union',
     value: 'primary',
     values: ['primary', 'secondary', 'tertiary', 'danger', 'success'],
+    render: true,
   },
   wcagLabel: {
-    displayedText: 'aria-label',
+    displayedText: 'ARIA Label (Required)',
     type: 'string',
     value: 'Standard Button',
+    render: true,
   },
 } as const;
 
