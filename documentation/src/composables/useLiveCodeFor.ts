@@ -31,11 +31,14 @@ export function useLiveCodeFor(
       .filter(Boolean)
       .join(newline + indent);
 
-    const openingTag = `<${component}${propsFormatted ? newline + indent + propsFormatted : ''}>`;
+    const openingTag = `<${component}${propsFormatted ? newline + indent + propsFormatted : ''}`;
     const closingTag = `</${component}>`;
     const content = slotContent ? newline + indent + slotContent + newline : '';
 
-    return `${openingTag}${content}${closingTag}`;
+    // Close the opening tag properly
+    const finalOpeningTag = openingTag + (content ? '>' : ' />');
+    
+    return content ? `${finalOpeningTag}${content}${closingTag}` : finalOpeningTag;
   });
 
   function formatValue(val: any): string {

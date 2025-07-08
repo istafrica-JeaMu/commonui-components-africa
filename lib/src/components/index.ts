@@ -15,6 +15,7 @@ import RuneSpinner from './Feedback/RuneSpinner.vue';
 
 // Input Components
 import RuneButton from './Inputs/RuneButton.vue';
+import RuneNavButton from './Inputs/RuneNavButton.vue';
 // import BaseCheckbox from './Inputs/BaseCheckbox.vue';
 // import BaseInput from './Inputs/BaseInput.vue';
 // import BaseSelect from './Inputs/BaseSelect.vue';
@@ -55,6 +56,8 @@ export {
   // Inputs
   RuneButton,
   RuneButton as CuiButton,
+  RuneNavButton,
+  RuneNavButton as CuiNavButton,
   // BaseCheckbox,
   // BaseInput,
   // BaseSelect,
