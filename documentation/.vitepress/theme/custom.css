@@ -1,4 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import 'tailwindcss';
+@import 'tailwindcss-primeui';
+@import '../../../lib/src/style.css';
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* PrimeVue CSS Variables */
+:root {
+  --p-primary-50: #E8EDEE;
+  --p-primary-100: #C5D1D5;
+  --p-primary-200: #A2B5BB;
+  --p-primary-300: #7F99A2;
+  --p-primary-400: #5D7E88;
+  --p-primary-500: #3A626F;
+  --p-primary-600: #174655;
+  --p-primary-700: #143C48;
+  --p-primary-800: #10313B;
+  --p-primary-900: #0D272F;
+  --p-primary-950: #0a1f25;
+  --p-surface-0: #fff;
+  --p-surface-50: #fafafa;
+  --p-surface-100: #f4f4f5;
+  --p-surface-200: #e4e4e7;
+  --p-surface-300: #d4d4d8;
+  --p-surface-400: #a1a1aa;
+  --p-surface-500: #71717a;
+  --p-surface-600: #52525b;
+  --p-surface-700: #3f3f46;
+  --p-surface-800: #27272a;
+  --p-surface-900: #18181b;
+  --p-surface-950: #09090b;
+  --p-content-border-radius: 6px;
+  --p-primary-color: var(--p-primary-500);
+  --p-primary-contrast-color: var(--p-surface-0);
+  --p-primary-hover-color: var(--p-primary-600);
+  --p-primary-active-color: var(--p-primary-700);
+  --p-content-border-color: var(--p-surface-200);
+  --p-content-hover-background: var(--p-surface-100);
+  --p-content-hover-color: var(--p-surface-800);
+  --p-highlight-background: var(--p-primary-50);
+  --p-highlight-color: var(--p-primary-700);
+  --p-highlight-focus-background: var(--p-primary-100);
+  --p-highlight-focus-color: var(--p-primary-800);
+  --p-text-color: var(--p-surface-700);
+  --p-text-hover-color: var(--p-surface-800);
+  --p-text-muted-color: var(--p-surface-500);
+  --p-text-hover-muted-color: var(--p-surface-600);
+}
+
+/* Custom theme variables */
+@theme {
+  /* Action Colors */
+  --color-action-primary: #4E33D9;
+  --color-action-secondary: #404040;
+  
+  /* Surface Colors */
+  --color-surface-danger: #ffb8b8;
+  --color-surface-success: #c1f0c2;
+  --color-surface-warn: #ffd6a5;
+  --color-surface-info: #a6e0ff;
+  
+  /* Text Colors */
+  --color-danger-small: #B91C1C;
+  --color-text-success-large: #16A34A;
+  --color-text-warn-large: #a44813;
+  --color-text-info-large: #0c77bd;
+}
+
+/* Button styling improvements */
+.p-button {
+  font-weight: 600;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.p-button:focus-visible {
+  outline: 2px solid;
+  outline-offset: 2px;
+}
+
+/* Button size consistency */
+.p-button.p-component {
+  min-height: 40px;
+  padding: 0.625rem 1rem;
+}
+
+.p-button.p-button-sm {
+  min-height: 32px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+}
+
+.p-button.p-button-lg {
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* Font family */
+body {
+  font-family: 'Inter', 'Open Sans', sans-serif;
+}
 
 /* Custom VitePress theme styles */
 

@@ -103,15 +103,26 @@ const buttonProps = computed(() => {
   if (props.size === 'sm') mappedProps.size = 'small';
   else if (props.size === 'lg') mappedProps.size = 'large';
 
-  // Variant/severity mapping
+  // Variant/severity mapping for PrimeVue compatibility
   if (props.variant === 'danger') mappedProps.severity = 'danger';
   else if (props.variant === 'success') mappedProps.severity = 'success';
 
-  // Styling
-  if (props.variant === 'tertiary') mappedProps.outlined = true;
-  if (props.variant === 'tertiary') mappedProps.text = true;
-  if (props.faded) mappedProps.plain = true;
-  if (isIconOnly()) mappedProps.rounded = true;
+  // Styling based on variant
+  if (props.variant === 'tertiary') {
+    mappedProps.outlined = true;
+    mappedProps.text = true;
+  }
+  
+  // Handle faded prop
+  if (props.faded && (props.variant === 'secondary' || props.variant === 'tertiary')) {
+    mappedProps.class += ' !opacity-70 hover:!opacity-100';
+  }
+  
+  // Icon-only button styling
+  if (isIconOnly()) {
+    mappedProps.rounded = true;
+    mappedProps.class += ' !w-10 !h-10 !p-0';
+  }
 
   return mappedProps;
 });
@@ -122,13 +133,20 @@ function isIconOnly() {
 
 // This will be used when we need to display the loading state
 const textColorClass = computed(() => {
-  return props.variant === 'secondary' || props.variant === 'tertiary'
-    ? 'text-slate-800 dark:text-slate-200'
-    : 'text-white dark:text-slate-800';
+  const colorMap = {
+    primary: 'text-white',
+    secondary: 'text-white',
+    tertiary: 'text-action-primary dark:text-action-primary',
+    danger: 'text-white',
+    success: 'text-white',
+  };
+  
+  return colorMap[props.variant];
 });
 
 const spinnerColor = computed(() => {
-  return props.variant === 'secondary' || props.variant === 'tertiary' ? 'slate' : 'white';
+  // RuneSpinner only accepts 'white' or 'slate' as color values
+  return props.variant === 'tertiary' ? 'slate' : 'white';
 });
 
 // Need to determine which loading template to show
@@ -151,12 +169,19 @@ const showRightIcon = computed(() => props.icon?.right && !showRightLoaderSlot.v
 function getButtonClasses(
   variant: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'success',
 ): string {
+  const baseClasses = 'transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2';
+  
   const classMap = {
-    primary: '!bg-action-primary',
-    secondary: '!bg-action-secondary',
-    tertiary: 'bg-transparent',
-    danger: '!bg-surface-danger !text-danger-small',
-    success: '!bg-green-600',
+    primary: `${baseClasses} !bg-action-primary !text-white !border-action-primary 
+              hover:!bg-action-primary/90 focus-visible:!outline-action-primary`,
+    secondary: `${baseClasses} !bg-action-secondary !text-white !border-action-secondary 
+                hover:!bg-action-secondary/90 focus-visible:!outline-action-secondary`,
+    tertiary: `${baseClasses} !bg-transparent !text-action-primary !border-action-primary 
+               hover:!bg-action-primary/10 focus-visible:!outline-action-primary`,
+    danger: `${baseClasses} !bg-red-500 !text-white !border-red-500 
+             hover:!bg-red-600 focus-visible:!outline-red-500`,
+    success: `${baseClasses} !bg-green-500 !text-white !border-green-500 
+              hover:!bg-green-600 focus-visible:!outline-green-500`,
   };
 
   return classMap[variant];
@@ -167,9 +192,9 @@ function getButtonClasses(
   <VoltButton v-bind="buttonProps">
     <!-- Use the default slot to create our fully custom button content -->
     <template #default>
-      <div class="flex items-center justify-center w-full">
+      <div class="flex items-center justify-center w-full h-full">
         <!-- Left side -->
-        <div v-if="showLeftLoaderSlot || showLeftIcon" class="mr-2">
+        <div v-if="showLeftLoaderSlot || showLeftIcon" class="flex items-center justify-center mr-2">
           <RuneSpinner v-if="showLeftLoaderSlot" :visible="true" :color="spinnerColor" size="xs" />
           <RuneIcon
             v-else-if="showLeftIcon"
@@ -181,7 +206,7 @@ function getButtonClasses(
         </div>
 
         <!-- Center/main content -->
-        <div>
+        <div class="flex items-center justify-center">
           <RuneSpinner
             v-if="showCenterLoaderSlot"
             :visible="true"
@@ -195,11 +220,11 @@ function getButtonClasses(
             :color="textColorClass"
             classes="stroke-2"
           />
-          <span v-else-if="text" class="font-semibold">{{ text }}</span>
+          <span v-else-if="text" class="font-semibold text-sm leading-tight">{{ text }}</span>
         </div>
 
         <!-- Right side -->
-        <div v-if="showRightLoaderSlot || showRightIcon" class="ml-2">
+        <div v-if="showRightLoaderSlot || showRightIcon" class="flex items-center justify-center ml-2">
           <RuneSpinner v-if="showRightLoaderSlot" :visible="true" :color="spinnerColor" size="xs" />
           <RuneIcon
             v-else-if="showRightIcon"

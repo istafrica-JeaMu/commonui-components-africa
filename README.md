@@ -1,94 +1,58 @@
-# Common UI Components - Africa Team
+# CommonUI Components Africa
 
-A comprehensive Vue.js component library built on PrimeVue and Tailwind CSS, designed for cross-project integration and maximum reusability.
+Vue.js component library built on PrimeVue and Tailwind CSS - Africa Edition
 
-## 🏗️ Project Structure
+## Installation
 
-This is a monorepo containing:
+```bash
+npm install @ist/commonui-components-africa
+```
 
-- **`lib/`** - Core component library with TypeScript and Vue 3
-- **`documentation/`** - VitePress documentation site with interactive examples
-- **`mcp-server/`** - Model Context Protocol server for development tools
+## Usage
 
-## 🚀 Quick Start
+```typescript
+import { RuneButton } from '@ist/commonui-components-africa'
+import '@ist/commonui-components-africa/style.css'
+```
 
-### Prerequisites
+### Example
 
-- Node.js 18+
-- pnpm 8+
+```vue
+<template>
+  <div>
+    <RuneButton variant="primary" size="md" wcag-label="Primary action button">
+      Click me
+    </RuneButton>
+  </div>
+</template>
 
-### Installation
+<script setup>
+import { RuneButton } from '@ist/commonui-components-africa'
+</script>
+```
+
+## Development
 
 ```bash
 # Install dependencies
 pnpm install
 
-# Start development server
-pnpm lib:dev
+# Build the library
+pnpm run build
 
-# Run documentation site
-pnpm docs:dev
-```
-
-## 📦 Library Usage
-
-```bash
-# Install in your project
-npm install @ist/commonui-components-africa
-```
-
-```vue
-<script setup>
-import { BaseButton, BaseInput } from '@ist/commonui-components-africa'
-import '@ist/commonui-components-africa/style.css'
-</script>
-
-<template>
-  <BaseButton variant="primary" wcag-label="Click me">
-    Click me
-  </BaseButton>
-</template>
-```
-
-## 🧪 Development
-
-```bash
 # Run tests
-pnpm lib:test
+pnpm run test
 
-# Run tests in watch mode
-pnpm lib:test:watch
-
-# Run tests with coverage
-pnpm lib:test:coverage
-
-# Build library
-pnpm lib:build
-
-# Lint code
-pnpm lib:lint
+# Start development server
+pnpm run dev
 ```
 
-## 📚 Documentation
+## Components
 
-- **[Component Documentation](./documentation/)** - Complete API reference
-- **[Development Guide](./documentation/docs/contribute/)** - How to contribute
-- **[Design System](./documentation/docs/theme/)** - Design tokens and guidelines
+- `RuneButton` - Flexible button component with multiple variants
+- `RuneNavButton` - Navigation-specific button component
+- More components coming soon...
 
-## 🎨 Technology Stack
+## License
 
-- **Vue 3** with Composition API
-- **TypeScript** for type safety
-- **PrimeVue 4.3.3** as base component library
-- **Tailwind CSS 4.1.4** for styling
-- **Vite** for build tooling
-- **Vitest** for testing
-- **VitePress** for documentation
-
-## 🏢 Team
-
-Built by the Africa team for cross-project component standardization.
-
-## 📄 License
-
-Internal use only - IST Africa Team 
+MIT 

@@ -1,19 +1,80 @@
 {
-  "name": "commonui-components-africa",
+  "name": "@ist/commonui-components-africa",
   "version": "1.0.0",
   "type": "module",
-  "description": "Africa team's version of the commonui-components project",
+  "description": "Vue.js component library built on PrimeVue and Tailwind CSS - Africa Edition",
+  "keywords": [
+    "vue",
+    "vue3",
+    "component",
+    "library",
+    "ui",
+    "primevue",
+    "tailwindcss",
+    "typescript",
+    "africa"
+  ],
+  "author": {
+    "name": "Africa Team",
+    "email": "africa-team@ist.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/istafrica-JeaMu/commonui-components-africa.git"
+  },
+  "homepage": "https://github.com/istafrica-JeaMu/commonui-components-africa#readme",
+  "bugs": {
+    "url": "https://github.com/istafrica-JeaMu/commonui-components-africa/issues"
+  },
+  "main": "./lib/dist/index.cjs.js",
+  "module": "./lib/dist/index.es.js",
+  "types": "./lib/dist/index.d.ts",
+  "typings": "./lib/dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/dist/index.d.ts",
+        "default": "./lib/dist/index.es.js"
+      },
+      "require": {
+        "types": "./lib/dist/index.d.ts",
+        "default": "./lib/dist/index.cjs.js"
+      }
+    },
+    "./style.css": "./lib/dist/assets/commonui-components-africa.css"
+  },
+  "files": [
+    "lib/dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "@headlessui/vue": "^1.7.23",
+    "@heroicons/vue": "^2.1.5",
+    "vue": "^3.5.13",
+    "primevue": "^4.3.3",
+    "tailwindcss-primeui": "^0.6.1"
+  },
   "scripts": {
+    "build": "pnpm --filter ./lib run build",
+    "dev": "pnpm --filter ./lib run dev",
+    "test": "pnpm --filter ./lib run test",
+    "test:debug": "pnpm --filter ./lib run test:debug",
+    "test:watch": "pnpm --filter ./lib run test:watch",
+    "test:coverage": "pnpm --filter ./lib run test:coverage",
+    "lint": "pnpm --filter ./lib run lint",
+    "lint:fix": "pnpm --filter ./lib run lint:fix",
+    "prepublishOnly": "pnpm run build",
     "docs:dev": "pnpm --filter ./documentation run dev",
     "docs:build": "pnpm --filter ./documentation run build",
     "docs:preview": "pnpm --filter ./documentation run preview",
-    "lib:deploy": "pnpm --filter ./lib run build && pnpm --filter ./lib run deploy",
-    "lib:test": "pnpm --filter ./lib run test",
-    "lib:test:debug": "pnpm --filter ./lib run test:debug",
-    "lib:test:watch": "pnpm --filter ./lib run test:watch",
-    "lib:test:coverage": "pnpm --filter ./lib run test:coverage",
     "mcp:start": "pnpm --filter ./mcp-server run start",
     "mcp:dev": "pnpm --filter ./mcp-server run dev"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.2",

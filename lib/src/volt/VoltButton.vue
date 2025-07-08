@@ -23,16 +23,17 @@ defineProps<Props>();
 
 const theme = ref<ButtonPassThroughOptions>({
   root: `inline-flex cursor-pointer select-none items-center justify-center overflow-hidden relative
-        px-3 py-2 gap-2 rounded-md disabled:pointer-events-none disabled:opacity-60 transition-colors duration-200
+        px-4 py-2.5 gap-2 rounded-md disabled:pointer-events-none disabled:opacity-60 transition-all duration-200
         bg-primary enabled:hover:bg-primary-emphasis enabled:active:bg-primary-emphasis-alt text-primary-contrast
         border border-primary enabled:hover:border-primary-emphasis enabled:active:border-primary-emphasis-alt
-        focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-primary
+        focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary
+        font-medium text-sm min-h-[40px] shadow-sm
         p-vertical:flex-col p-fluid:w-full p-icon-only:w-10
-        p-icon-only:w-10 p-icon-only:px-0 p-icon-only:gap-0
+        p-icon-only:w-10 p-icon-only:px-0 p-icon-only:gap-0 p-icon-only:min-h-[40px]
         p-icon-only:p-rounded:rounded-full p-icon-only:p-rounded:h-10
-        p-small:text-sm p-small:px-[0.625rem] p-small:py-[0.375rem]
-        p-large:text-[1.125rem] p-large:px-[0.875rem] p-large:py-[0.625rem]
-        p-raised:shadow-sm p-rounded:rounded-[2rem]
+        p-small:text-xs p-small:px-3 p-small:py-2 p-small:min-h-[32px]
+        p-large:text-base p-large:px-6 p-large:py-3 p-large:min-h-[48px]
+        p-raised:shadow-md p-rounded:rounded-[2rem]
         p-outlined:bg-transparent enabled:hover:p-outlined:bg-primary-50 enabled:active:p-outlined:bg-primary-100
         p-outlined:border-primary-200 enabled:hover:p-outlined:border-primary-200 enabled:active:p-outlined:border-primary-200
         p-outlined:text-primary enabled:hover:p-outlined:text-primary enabled:active:p-outlined:text-primary
@@ -48,8 +49,8 @@ const theme = ref<ButtonPassThroughOptions>({
     `,
   loadingIcon: ``,
   icon: `p-right:order-1 p-bottom:order-2`,
-  label: `font-medium p-icon-only:invisible p-icon-only:w-0
-        p-small:text-sm p-large:text-[1.125rem]`,
+  label: `font-semibold p-icon-only:invisible p-icon-only:w-0
+        p-small:text-xs p-large:text-base`,
   pcBadge: {
     root: `min-w-4 h-4 leading-4 bg-primary-contrast rounded-full text-primary text-xs font-bold`,
   },
